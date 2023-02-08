@@ -1,11 +1,14 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-//const Employee = require('./lib/employee');
+
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
+const html = require('./utils/generateHTML.js');
 
-let employeeList = [];
+const htmlFilePath = './dist/index.html';
+
+const employeeList = [];
 
 function pickEmployee(e, data){
 
@@ -13,7 +16,7 @@ function pickEmployee(e, data){
 
     switch(e){
         case 'Manager':
-            if(data){ employee = new Manager(data.name, data.id, data.email, data.officeNo) }
+            if(data){ employee = new Manager(data.name, data.id, data.email, data.officeNumber) }
             else{ employee = new Manager() }
             break;
         case 'Engineer':
@@ -56,7 +59,7 @@ function employeeQuestions(e) {
         case 'Manager':
             questions.push({
                 type: 'input',
-                name: 'officeNo',
+                name: 'officeNumber',
                 message: employee.getOfficeNumber(),                
             });
             break;
@@ -87,34 +90,28 @@ function employeeQuestions(e) {
         ]        
     });
 
-    //console.log(questions);
-
     return questions;
 }
 
 function employeePrompt(e) {
 
-    //console.log("employeePrompt taking:" + e);
-
     const ask = new Promise((res, rej) => {
         let questions = employeeQuestions(e);
         res(questions);
-    })
+    });
 
     ask
     .then((questions) => {
-        //console.log("Questions from promise");
-        //console.log(questions);
 
         inquirer
         .prompt(questions)
         .then((answers) => {
-            //console.log(answers);
+
             const prompt =  {
                 name: answers.name,
                 id: answers.id,
                 email: answers.email,
-                officeNo: answers.officeNo,
+                officeNumber: answers.officeNumber,
                 github: answers.github,
                 school: answers.school,
             }
@@ -122,55 +119,37 @@ function employeePrompt(e) {
             let employee = pickEmployee(e, prompt);
 
             employeeList.push(employee);
-            
-            console.log(employeeList);
 
             if(answers.continue != 'Finish building my team'){
-                //console.log(answers.continue);
                 employeePrompt(answers.continue);
             }else{
                 console.log("All employees entered!");
-            }
-            
-            console.log("Exiting inquirer");
-        });
-    })
 
-    //let questions = employeeQuestions(e);
+                const htmlText = html.generateHTML(employeeList);
+                writeToFile(htmlFilePath, htmlText);
+            }            
+        
+        }); // end inquirer
 
-    
+    }); // end ask
+
+} // end function
+
+// Create a function to write HTML file
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (err) => {
+        if (err) {
+            console.error(err)
+        } else {
+            console.log('Success: HTML File Generated!')
+        }
+    });
 }
 
 // Create a function to initialize app
 function init() {
 
     employeePrompt('Manager');
-
-    /* if(prompt.continue === 'Engineer'){
-        console.log('Engineer');
-    }else if(prompt.continue === 'Intern'){
-        console.log('Intern');
-    }else if(prompt.continue === 'Finish building my team'){
-        console.log('Exiting loop');
-        //Exits while loop
-        employeeLoop = false;
-    } */            
-
-    //const readmeText = markdown.generateMarkdown(prompt);
-
-    //console.log(readmeText);
-
-    //writeToFile(readmeFilePath, readmeText);
-
-    /* const prompt =  {
-        name: response.name,
-        id: response.id,
-        email: response.email,
-        officeNo: response.officeNo,
-        github: response.github,
-        school: response.school,
-        continue: response.continue,
-    } */
 
 }
 
