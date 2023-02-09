@@ -2,7 +2,7 @@
 
 ## Description
 
-The purpose of this program is to provide a simple way for a team manager to enter information about their team that will then be passed into a styled HTML file for their future reference. Just be answering a list of prompted questions, they can have a quick way of generating an HTML page that will contain all of their team members and be of a repeatable level of quality. 
+The purpose of this program is to provide a simple way for a team manager to enter information about their team that will then be passed into a styled HTML file for their future reference. Just by answering a list of prompted questions, they can have a quick way of generating an HTML page that will contain all of their team members and be of a repeatable level of quality. 
 
 This program utilizes node.js as well as the npm packages 'fs' to write to the outputted HTML file, and 'inquirer' to prompt questions to the user and pass the answers onto 'fs' to write out to the file. Finally this program also uses Jest for its suite of code testing.
 
