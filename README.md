@@ -34,6 +34,7 @@ Then your finished HTML file will be located in the 'dist' folder.
 
 <br>
 Here is a video demonstrating how the program should run:
+
 https://user-images.githubusercontent.com/117125528/217923988-b6f10bc3-16a4-471e-8da3-464e0f7cd2da.mp4
 
 
