@@ -1,3 +1,4 @@
+// Function that accepts a class object and returns strings containing specific info relating that the given class
 function renderEmployeeSpecific(data){
 
     const type = data.constructor.name;
@@ -24,6 +25,7 @@ function renderEmployeeSpecific(data){
     return obj;
 }
 
+// Specifically renders the Info Cards containing each team members info
 function renderInfoCardSection(data){
 
     let string = '';
@@ -67,7 +69,7 @@ function renderInfoCardSection(data){
 }
 
 
-// Create a function to generate text for HTML
+// Create a function to generate text for HTML with inline CSS
 function generateHTML(data) {
 
     const infoCardSection = renderInfoCardSection(data)
@@ -110,7 +112,7 @@ function generateHTML(data) {
         <h1>My Team</h1>
     </header>
     <div class="container">
-        <div class="row align-items-center justify-content-evenly">
+        <div class="row justify-content-evenly">
             ${infoCardSection}
         </div>
     </div>
