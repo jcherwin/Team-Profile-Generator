@@ -6,6 +6,10 @@ The purpose of this program is to provide a simple way for a team manager to ent
 
 This program utilizes node.js as well as the npm packages 'fs' to write to the outputted HTML file, and 'inquirer' to prompt questions to the user and pass the answers onto 'fs' to write out to the file. Finally this program also uses Jest for its suite of code testing.
 
+## Link
+
+Here is a link to the deployed application on Heroku: [https://gentle-island-36484.herokuapp.com/notes](https://gentle-island-36484.herokuapp.com/notes)
+
 ## Installation
 
 This program was built and tested using node.js v16.19.0.
